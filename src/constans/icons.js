@@ -8,4 +8,6 @@ export default icons = {
   back: require('../assets/icons/back.png'),
   water: require('../assets/icons/water.png'),
   water2: require('../assets/icons/water2.png'),
+  confirm: require('../assets/icons/confirm.png'),
+  send: require('../assets/icons/send.png'),
 };

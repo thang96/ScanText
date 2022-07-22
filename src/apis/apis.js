@@ -1,15 +1,14 @@
 import axios from 'axios';
 export const postImg = img => {
-  const fromData = new FormData();
-  fromData.append('img', {
-    uri: img?.path,
+  const formData = new FormData();
+  formData.append('img', {
+    uri: Platform.OS === 'ios' ? '/private' + img?.path : img?.uri,
     name: getFileName(img),
     type: img?.mime,
   });
-
   return new Promise((resole, reject) => {
     axios
-      .post('http://210.245.51.29:8020/get_card_region', fromData, {
+      .post('http://210.245.51.29:8020/get_card_region', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -23,12 +22,13 @@ export const postImg = img => {
       });
   });
 };
-export const postImageAndPosition = async data => {
+export const postImageAndPosition = data => {
   const {img, tl, tr, br, bl} = data;
   const fromData = new FormData();
   // console.log(img, typeof img);
   fromData.append('img', {
-    uri: img?.path,
+    uri: Platform.OS === 'ios' ? '/private' + img?.path : img?.uri,
+    // path: Platform.OS === 'ios' ? '/private' + img?.uri : img?.path,
     name: getFileName(img),
     type: img?.mime,
   });
@@ -46,6 +46,22 @@ export const postImageAndPosition = async data => {
   fromData.append('bl', parseInt(bl.x * 3.5));
   fromData.append('bl', parseInt(bl.y * 3.5));
 
+  // try {
+  //   const response = await axios
+  //     .post('http://210.245.51.29:8020/get_card_no', fromData, {
+  //       headers: {
+  //         'Content-Type': 'multipart/form-data',
+  //       },
+  //     })
+  //     .then(data => console.log(data));
+
+  //   console.log('SSSS: ', response);
+  // } catch (error) {
+  //   const {response} = error;
+  //   console.error(response);
+  //   alert('Fail');
+  // }
+
   return new Promise((resole, reject) => {
     axios
       .post('http://210.245.51.29:8020/get_card_no', fromData, {
@@ -53,9 +69,7 @@ export const postImageAndPosition = async data => {
           'Content-Type': 'multipart/form-data',
         },
       })
-      .then(res => {
-        resole(res.data);
-      })
+      .then(res => resole(res.data))
       .catch(errors => {
         alert(errors);
         reject(errors => console.log(errors));

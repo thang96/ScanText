@@ -21,6 +21,8 @@ import CustomButton from '../components/CustomButton';
 import ImagePicker from 'react-native-image-crop-picker';
 import {useNavigation} from '@react-navigation/native';
 import {postImg} from '../apis/apis';
+import common from '../utils/common';
+import styles from '../resource/styles/styleHomeScreen';
 const HomeScreen = () => {
   const navigation = useNavigation();
   const scanValue = useRef(new Animated.Value(0)).current;
@@ -28,7 +30,6 @@ const HomeScreen = () => {
     scanAnimated();
   }, []);
 
-  const [photo, setPhoto] = useState(false);
   const spin = scanValue.interpolate({
     inputRange: [0, 1],
     outputRange: [-150, 120],
@@ -52,22 +53,24 @@ const HomeScreen = () => {
     ).start();
   };
   const [sendImage, setSendImage] = useState(false);
+  const [photo, setPhoto] = useState(false);
   const pickSingleWithCamera = () => {
     ImagePicker.openCamera({
       width: 1080,
       height: 1920,
       cropping: true,
     }).then(async image => {
-      console.log(image);
+      image.uri = image.path;
       setSendImage(true);
-      await postImg(image).then(data => {
-        console.log(data);
+      const imageConverted = await common.resizeImageNotVideo(image);
+      await postImg(imageConverted).then(data => {
         setSendImage(false);
-        navigation.navigate('CameraCrop', {params: image, data});
+        navigation.navigate('CameraCrop', {params: imageConverted, data});
       });
     });
   };
-  if (sendImage) return <ActivityIndicator size="small" color="#0000ff" />;
+
+  if (sendImage) return <ActivityIndicator size="large" color="#0000ff" />;
   return (
     <SafeAreaView style={styles.container}>
       <View
@@ -85,15 +88,8 @@ const HomeScreen = () => {
 
       <View style={styles.viewScanBottom}>
         <TouchableOpacity
-          onPress={pickSingleWithCamera}
-          style={{
-            width: 100,
-            height: 100,
-            borderRadius: 60,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'rgba(0,0,0,0.1)',
-          }}>
+          onPress={() => pickSingleWithCamera()}
+          style={styles.buttonCamera}>
           <Image source={icons.ic_camera} style={{width: 30, height: 30}} />
           <Text style={{fontWeight: 'bold', color: 'white'}}>Open</Text>
           <Text style={{fontWeight: 'bold', color: 'white'}}>Camera</Text>
@@ -102,51 +98,5 @@ const HomeScreen = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'rgb(255,255,255)',
-  },
-  viewTop: {
-    width: '100%',
-    height: '50%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  viewScanTop: {
-    marginTop: 150,
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 10,
-    borderColor: 'rgba(0,0,0,0.5)',
-    backgroundColor: 'white',
-    borderRadius: 10,
-    transform: [{rotate: '25deg'}],
-  },
-  imageScan: {
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
-    transform: [{rotate: '-15deg'}],
-  },
-  lineScan: {
-    height: 2,
-    backgroundColor: 'red',
-    width: '50%',
-    zIndex: 2,
-    marginRight: 20,
-  },
-  viewScanBottom: {
-    marginBottom: 50,
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    bottom: 0,
-  },
-});
 
 export default HomeScreen;
