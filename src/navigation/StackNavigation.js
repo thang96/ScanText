@@ -1,7 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {HomeScreen, Splash, CameraCrop} from '../screens';
-import ResponseMessage from '../screens/ResponseMessage';
 const Stack = createStackNavigator();
 const StackNavigation = () => {
   return (
@@ -26,13 +25,6 @@ const StackNavigation = () => {
         }}
         name="CameraCrop"
         component={CameraCrop}
-      />
-      <Stack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name="ResponseMessage"
-        component={ResponseMessage}
       />
     </Stack.Navigator>
   );

@@ -2,9 +2,15 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.1)',
+    backgroundColor: 'rgba(2,21,66,0.1)',
   },
   viewImage: {justifyContent: 'center', alignItems: 'center'},
+  titleTop: {
+    color: 'white',
+    fontSize: 24,
+    fontStyle: 'italic',
+    fontWeight: 'bold',
+  },
   imageCrop: {
     width: 315,
     height: 495,
@@ -42,7 +48,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: '100%',
     height: 56,
-    backgroundColor: 'grey',
+    backgroundColor: 'rgb(2,21,66)',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -52,7 +58,7 @@ const styles = StyleSheet.create({
   headerTop: {
     width: '100%',
     height: 56,
-    backgroundColor: 'grey',
+    backgroundColor: 'rgb(2,21,66)',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

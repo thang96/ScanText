@@ -1,11 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
   Text,
-  useColorScheme,
   View,
   Image,
   ImageBackground,
@@ -14,8 +10,6 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {icons, images} from '../constans';
-import DragAndDrop from '../components/DragAndDrop';
-import Svg, {Polyline, Line, Path} from 'react-native-svg';
 import {Easing} from 'react-native-reanimated';
 import CustomButton from '../components/CustomButton';
 import ImagePicker from 'react-native-image-crop-picker';
@@ -32,7 +26,7 @@ const HomeScreen = () => {
 
   const spin = scanValue.interpolate({
     inputRange: [0, 1],
-    outputRange: [-150, 120],
+    outputRange: [-120, 120],
   });
   const scanAnimated = () => {
     Animated.loop(
@@ -73,26 +67,26 @@ const HomeScreen = () => {
   if (sendImage) return <ActivityIndicator size="large" color="#0000ff" />;
   return (
     <SafeAreaView style={styles.container}>
-      <View
-        onLayout={ev => {
-          const layout = ev.nativeEvent.layout;
-        }}
-        style={styles.viewTop}>
-        <View style={styles.viewScanTop}>
-          <Image style={styles.imageScan} source={icons.document} />
-          <Animated.View
-            style={[styles.lineScan, {transform: [{translateY: spin}]}]}
-          />
-        </View>
+      <Text style={styles.textTitle}>Scan your text</Text>
+      <View style={styles.containerViewScan}>
+        <Image style={styles.eachContainerViewScan} source={icons.crop} />
+        <Image style={styles.childrenViewScan} source={icons.card} />
+        <Animated.View
+          style={[styles.lineScan, {transform: [{translateY: spin}]}]}
+        />
       </View>
+
+      <View></View>
 
       <View style={styles.viewScanBottom}>
         <TouchableOpacity
           onPress={() => pickSingleWithCamera()}
           style={styles.buttonCamera}>
           <Image source={icons.ic_camera} style={{width: 30, height: 30}} />
-          <Text style={{fontWeight: 'bold', color: 'white'}}>Open</Text>
-          <Text style={{fontWeight: 'bold', color: 'white'}}>Camera</Text>
+          <Text style={{fontWeight: 'bold', color: 'rgb(2,21,66)'}}>Open</Text>
+          <Text style={{fontWeight: 'bold', color: 'rgb(2,21,66)'}}>
+            Camera
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

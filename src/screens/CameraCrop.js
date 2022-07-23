@@ -85,17 +85,12 @@ const CameraCrop = () => {
               style={{width: 30, height: 30, tintColor: 'white'}}
             />
           </TouchableOpacity>
-          <Text style={{color: 'white', fontSize: 24, fontStyle: 'italic'}}>
-            Camera Crop
-          </Text>
+          <Text style={styles.titleTop}>Camera Crop</Text>
         </View>
         <ScrollView style={styles.container}>
           {keyboardIsShow == false && (
             <View style={[styles.container, styles.viewImage]}>
               <ImageBackground
-                onLayout={ev => {
-                  const layout = ev.nativeEvent.layout;
-                }}
                 resizeMode="cover"
                 source={{uri: `${image}`}}
                 style={{width: widthImage, height: heightImage}}>
@@ -282,11 +277,6 @@ const CameraCrop = () => {
                 const bl = point4;
                 const data = {img, tl, tr, br, bl};
                 postImageAndPosition(data).then(res => {
-                  console.log(
-                    '--------------',
-                    res.card_no,
-                    '---------------------------',
-                  );
                   setResposeData(res.card_no);
                 });
               }}

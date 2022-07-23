@@ -2,39 +2,6 @@ import {Alert} from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import ImageResizer from 'react-native-image-resizer';
 
-function showAlertCaution(message, onCancel, onConfirm) {
-  Alert.alert('Thông báo', message, [
-    {
-      text: 'Huỷ',
-      style: 'cancel',
-      onPress: () => {
-        if (onCancel) {
-          onCancel();
-        }
-      },
-    },
-    {
-      text: 'Đồng ý',
-      onPress: () => {
-        onConfirm();
-      },
-    },
-  ]);
-}
-
-function showAlertOneChoice(message, labelButton, onConfirm) {
-  Alert.alert('Thông báo', message, [
-    {
-      text: labelButton,
-      onPress: () => {
-        if (onConfirm) {
-          onConfirm();
-        }
-      },
-    },
-  ]);
-}
-
 function getFileName(file) {
   if (file.name !== undefined) {
     return file.name;
@@ -133,9 +100,6 @@ const postFileImg = name => {
 
 const common = {
   getFileNameFromPath,
-
-  showAlertCaution,
-  showAlertOneChoice,
   getFileName,
   pickImageFromCamera,
   pickImageFromGallery,

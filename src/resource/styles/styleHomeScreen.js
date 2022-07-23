@@ -2,46 +2,48 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'rgb(255,255,255)',
+    backgroundColor: 'rgb(2,21,66)',
   },
-  viewTop: {
-    width: '100%',
-    height: '50%',
+  textTitle: {
+    color: 'white',
+    alignSelf: 'center',
+    fontSize: 30,
+    fontWeight: 'bold',
+    marginTop: 50,
+  },
+  containerViewScan: {
+    width: '90%',
+    height: '40%',
+    alignSelf: 'center',
+    marginTop: 80,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  viewScanTop: {
-    marginTop: 150,
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 10,
-    borderColor: 'rgba(0,0,0,0.5)',
-    backgroundColor: 'white',
-    borderRadius: 10,
-    transform: [{rotate: '25deg'}],
-  },
-  imageScan: {
-    width: '100%',
-    height: '100%',
+  eachContainerViewScan: {
+    tintColor: 'white',
+    width: 300,
+    height: 300,
     position: 'absolute',
-    transform: [{rotate: '-15deg'}],
+  },
+  childrenViewScan: {
+    tintColor: 'white',
+    width: 150,
+    height: 150,
+    position: 'absolute',
   },
   lineScan: {
     height: 2,
-    backgroundColor: 'red',
-    width: '50%',
+    backgroundColor: 'white',
+    width: '70%',
     zIndex: 2,
-    marginRight: 20,
   },
   viewScanBottom: {
-    marginBottom: 50,
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
     bottom: 0,
+    marginBottom: 50,
   },
   buttonCamera: {
     width: 100,
@@ -49,7 +51,7 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.1)',
+    backgroundColor: 'rgb(255,255,255)',
   },
 });
 export default styles;

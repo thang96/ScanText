@@ -39,14 +39,20 @@ const Splash = () => {
   useEffect(() => {
     if (!isReady) return;
     navigation.navigate('HomeScreen');
-    // navigation.navigate('CameraCrop');
   }, [isReady]);
   return (
     <SafeAreaView style={[styles.container]}>
-      <Animated.Image
-        style={{width: 300, height: 300, transform: [{scale: scaleValue}]}}
-        source={icons.camera}
-      />
+      <ImageBackground style={styles.background} source={images.background}>
+        <Animated.Image
+          style={{
+            tintColor: 'rgb(2,255,255)',
+            width: 250,
+            height: 250,
+            transform: [{scale: scaleValue}],
+          }}
+          source={icons.scan}
+        />
+      </ImageBackground>
     </SafeAreaView>
   );
 };
@@ -54,9 +60,13 @@ const Splash = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'rgba(255,255,255,0.2))',
+  },
+  background: {
+    width: '100%',
+    height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'rgb(5,11,41)',
   },
 });
 
