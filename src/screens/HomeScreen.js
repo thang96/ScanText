@@ -8,10 +8,10 @@ import {
   Animated,
   TouchableOpacity,
   ActivityIndicator,
+  Dimensions,
 } from 'react-native';
 import {icons, images} from '../constans';
 import {Easing} from 'react-native-reanimated';
-import CustomButton from '../components/CustomButton';
 import ImagePicker from 'react-native-image-crop-picker';
 import {useNavigation} from '@react-navigation/native';
 import {postImg} from '../apis/apis';
@@ -20,7 +20,13 @@ import styles from '../resource/styles/styleHomeScreen';
 const HomeScreen = () => {
   const navigation = useNavigation();
   const scanValue = useRef(new Animated.Value(0)).current;
+  const [zoomScale, setZooomScale] = useState(4);
+
   useEffect(() => {
+    const dimension = Dimensions.get('window').height;
+    if (dimension > 700) {
+      setZooomScale(3.5);
+    }
     scanAnimated();
   }, []);
 
@@ -47,7 +53,7 @@ const HomeScreen = () => {
     ).start();
   };
   const [sendImage, setSendImage] = useState(false);
-  const [photo, setPhoto] = useState(false);
+
   const pickSingleWithCamera = () => {
     ImagePicker.openCamera({
       width: 1080,
@@ -59,7 +65,12 @@ const HomeScreen = () => {
       const imageConverted = await common.resizeImageNotVideo(image);
       await postImg(imageConverted).then(data => {
         setSendImage(false);
-        navigation.navigate('CameraCrop', {params: imageConverted, data});
+        const scale = zoomScale;
+        navigation.navigate('CameraCrop', {
+          params: imageConverted,
+          data,
+          scale,
+        });
       });
     });
   };

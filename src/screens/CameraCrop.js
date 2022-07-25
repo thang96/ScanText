@@ -2,10 +2,7 @@ import React, {useState, useEffect, useCallback} from 'react';
 import {
   SafeAreaView,
   ScrollView,
-  StatusBar,
-  StyleSheet,
   Text,
-  useColorScheme,
   View,
   Image,
   ImageBackground,
@@ -21,6 +18,7 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import CustomButton from '../components/CustomButton';
 import {postImageAndPosition} from '../apis/apis';
 import styles from '../resource/styles/styleCameraCrop';
+import SvgPoint from '../components/SvgPoint';
 function debounce(func, timeout = 300) {
   let timer;
   return (...args) => {
@@ -30,32 +28,33 @@ function debounce(func, timeout = 300) {
     }, timeout);
   };
 }
-const CameraCrop = () => {
+const CameraCrop = props => {
   const navigation = useNavigation();
   const route = useRoute();
   const image = route.params.params.uri;
+  const scale = route.params.scale;
   const [isDrag, setIsDrag] = useState(false);
   const [point, setpoint] = useState({x: 0, y: 0});
   const [resposeData, setResposeData] = useState('');
   const [keyboardIsShow, setKeyBoardIsShow] = useState(false);
   const [point1, setpoint1] = useState({
-    x: route.params.data.tl[0] / 3.5,
-    y: route.params.data.tl[1] / 3.5,
+    x: route.params.data.tl[0] / scale,
+    y: route.params.data.tl[1] / scale,
   });
   const [point2, setpoint2] = useState({
-    x: route.params.data.tr[0] / 3.5,
-    y: route.params.data.tr[1] / 3.5,
+    x: route.params.data.tr[0] / scale,
+    y: route.params.data.tr[1] / scale,
   });
   const [point3, setpoint3] = useState({
-    x: route.params.data.br[0] / 3.5,
-    y: route.params.data.br[1] / 3.5,
+    x: route.params.data.br[0] / scale,
+    y: route.params.data.br[1] / scale,
   });
   const [point4, setpoint4] = useState({
-    x: route.params.data.bl[0] / 3.5,
-    y: route.params.data.bl[1] / 3.5,
+    x: route.params.data.bl[0] / scale,
+    y: route.params.data.bl[1] / scale,
   });
-  const widthImage = 1080 / 3.5;
-  const heightImage = 1920 / 3.5;
+  const widthImage = 1080 / scale;
+  const heightImage = 1920 / scale;
 
   const onDragActive = useCallback(
     debounce(position => {
@@ -63,7 +62,6 @@ const CameraCrop = () => {
     }, 20),
     [],
   );
-
   useEffect(() => {
     Keyboard.addListener('keyboardDidShow', () => {
       setKeyBoardIsShow(true);
@@ -72,7 +70,21 @@ const CameraCrop = () => {
       setKeyBoardIsShow(false);
     });
   }, []);
-
+  const postData = () => {
+    const img = route.params.params;
+    const tlX = point1.x * scale;
+    const tlY = point1.y * scale;
+    const trX = point2.x * scale;
+    const trY = point2.y * scale;
+    const brX = point3.x * scale;
+    const brY = point3.y * scale;
+    const blX = point4.x * scale;
+    const blY = point4.y * scale;
+    const data = {img, tlX, tlY, trX, trY, brX, brY, blX, blY};
+    postImageAndPosition(data).then(res => {
+      setResposeData(res.card_no);
+    });
+  };
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.container}>
@@ -94,41 +106,14 @@ const CameraCrop = () => {
                 resizeMode="cover"
                 source={{uri: `${image}`}}
                 style={{width: widthImage, height: heightImage}}>
-                <Svg height={`${heightImage}`} width={`${widthImage}`}>
-                  <Line
-                    x1={point1.x}
-                    y1={point1.y}
-                    x2={point2.x}
-                    y2={point2.y}
-                    stroke="rgb(42,178,182)"
-                    strokeWidth="1"
-                  />
-                  <Line
-                    x1={point2.x}
-                    y1={point2.y}
-                    x2={point3.x}
-                    y2={point3.y}
-                    stroke="rgb(42,178,182)"
-                    strokeWidth="1"
-                  />
-                  <Line
-                    x1={point3.x}
-                    y1={point3.y}
-                    x2={point4.x}
-                    y2={point4.y}
-                    stroke="rgb(42,178,182)"
-                    strokeWidth="1"
-                  />
-                  <Line
-                    x1={point4.x}
-                    y1={point4.y}
-                    x2={point1.x}
-                    y2={point1.y}
-                    stroke="rgb(42,178,182)"
-                    strokeWidth="1"
-                  />
-                </Svg>
-
+                <SvgPoint
+                  point1={point1}
+                  point2={point2}
+                  point3={point3}
+                  point4={point4}
+                  widthImage={widthImage}
+                  heightImage={heightImage}
+                />
                 <DragAndDrop
                   styleBox={{
                     position: 'absolute',
@@ -269,17 +254,7 @@ const CameraCrop = () => {
               styleIcon={{tintColor: 'white'}}
               icon={icons.send}
               label={'Send Position'}
-              onPress={() => {
-                const img = route.params.params;
-                const tl = point1;
-                const tr = point2;
-                const br = point3;
-                const bl = point4;
-                const data = {img, tl, tr, br, bl};
-                postImageAndPosition(data).then(res => {
-                  setResposeData(res.card_no);
-                });
-              }}
+              onPress={() => postData()}
             />
           ) : (
             <CustomButton
@@ -297,5 +272,4 @@ const CameraCrop = () => {
     </SafeAreaView>
   );
 };
-
 export default CameraCrop;

@@ -23,28 +23,25 @@ export const postImg = img => {
   });
 };
 export const postImageAndPosition = data => {
-  const {img, tl, tr, br, bl} = data;
+  const {img, tlX, tlY, trX, trY, brX, brY, blX, blY} = data;
   const fromData = new FormData();
-  // console.log(img, typeof img);
   fromData.append('img', {
     uri: Platform.OS === 'ios' ? '/private' + img?.path : img?.uri,
-    // path: Platform.OS === 'ios' ? '/private' + img?.uri : img?.path,
     name: getFileName(img),
     type: img?.mime,
   });
-  // console.log(tl, typeof tl);
 
-  fromData.append('tl', parseInt(tl.x * 3.5));
-  fromData.append('tl', parseInt(tl.y * 3.5));
+  fromData.append('tl', parseInt(tlX));
+  fromData.append('tl', parseInt(tlY));
 
-  fromData.append('tr', parseInt(tr.x * 3.5));
-  fromData.append('tr', parseInt(tr.y * 3.5));
+  fromData.append('tr', parseInt(trX));
+  fromData.append('tr', parseInt(trY));
 
-  fromData.append('br', parseInt(br.x * 3.5));
-  fromData.append('br', parseInt(br.y * 3.5));
+  fromData.append('br', parseInt(brX));
+  fromData.append('br', parseInt(brY));
 
-  fromData.append('bl', parseInt(bl.x * 3.5));
-  fromData.append('bl', parseInt(bl.y * 3.5));
+  fromData.append('bl', parseInt(blX));
+  fromData.append('bl', parseInt(blY));
 
   // try {
   //   const response = await axios
@@ -54,7 +51,6 @@ export const postImageAndPosition = data => {
   //       },
   //     })
   //     .then(data => console.log(data));
-
   //   console.log('SSSS: ', response);
   // } catch (error) {
   //   const {response} = error;
