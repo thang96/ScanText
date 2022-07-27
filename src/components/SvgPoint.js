@@ -10,32 +10,32 @@ const SvgPoint = props => {
         y1={point1.y}
         x2={point2.x}
         y2={point2.y}
-        stroke="rgb(42,178,182)"
-        strokeWidth="1"
+        stroke="rgb(24,119,242)"
+        strokeWidth="1.5"
       />
       <Line
         x1={point2.x}
         y1={point2.y}
         x2={point3.x}
         y2={point3.y}
-        stroke="rgb(42,178,182)"
-        strokeWidth="1"
+        stroke="rgb(24,119,242)"
+        strokeWidth="1.5"
       />
       <Line
         x1={point3.x}
         y1={point3.y}
         x2={point4.x}
         y2={point4.y}
-        stroke="rgb(42,178,182)"
-        strokeWidth="1"
+        stroke="rgb(24,119,242)"
+        strokeWidth="1.5"
       />
       <Line
         x1={point4.x}
         y1={point4.y}
         x2={point1.x}
         y2={point1.y}
-        stroke="rgb(42,178,182)"
-        strokeWidth="1"
+        stroke="rgb(24,119,242)"
+        strokeWidth="1.5"
       />
     </Svg>
   );

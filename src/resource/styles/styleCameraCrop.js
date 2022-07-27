@@ -4,17 +4,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(2,21,66,0.1)',
   },
-  viewImage: {justifyContent: 'center', alignItems: 'center'},
+  viewImage: {justifyContent: 'center', alignItems: 'center', marginTop: 20},
   titleTop: {
     color: 'white',
     fontSize: 24,
     fontStyle: 'italic',
     fontWeight: 'bold',
   },
-  imageCrop: {
-    width: 315,
-    height: 495,
-  },
+
   viewScale: {
     width: 100,
     height: 100,
@@ -31,18 +28,7 @@ const styles = StyleSheet.create({
     width: 110,
     height: 110,
   },
-  viewPoint: {
-    width: 9,
-    height: 9,
-    borderRadius: 20,
-    backgroundColor: 'white',
-    borderWidth: 1,
-    borderColor: 'red',
-    position: 'absolute',
-    top: 50,
-    left: 50,
-    zIndex: 2,
-  },
+
   headerBottom: {
     position: 'absolute',
     bottom: 0,
@@ -73,12 +59,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     position: 'absolute',
     left: 0,
-  },
-  buttonNext: {
-    width: 120,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 export default styles;

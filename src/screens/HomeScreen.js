@@ -60,7 +60,7 @@ const HomeScreen = () => {
       height: 1920,
       cropping: true,
     }).then(async image => {
-      image.uri = image.path;
+      // image.uri = image.path;
       setSendImage(true);
       const imageConverted = await common.resizeImageNotVideo(image);
       await postImg(imageConverted).then(data => {

@@ -18,7 +18,6 @@ const App = () => {
       <GestureHandlerRootView style={styles.container}>
         <SafeAreaView style={styles.container}>
           <StatusBar hidden />
-
           <StackNavigation />
         </SafeAreaView>
       </GestureHandlerRootView>
