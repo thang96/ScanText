@@ -98,7 +98,7 @@ const DragAndDrop = props => {
         hitSlop={{top: 30, bottom: 30, left: 30, right: 30}}
         onGestureEvent={gestureHandler}>
         <Animated.View style={[animatedStyle, style]}>
-          <Image source={icons.water2} style={[styless.iconStyle, styleBox]} />
+          <Image source={icons.circle1} style={[styless.iconStyle, styleBox]} />
         </Animated.View>
       </PanGestureHandler>
     </>
@@ -106,8 +106,9 @@ const DragAndDrop = props => {
 };
 const styless = StyleSheet.create({
   iconStyle: {
-    width: 20,
-    height: 20,
+    width: 14,
+    height: 14,
+    tintColor: 'rgb(24,119,242)',
   },
 });
 export default DragAndDrop;

@@ -56,10 +56,32 @@ const CameraCrop = props => {
   const widthImage = 1080 / scale;
   const heightImage = 1920 / scale;
 
-  const onDragActive = useCallback(
+  const onDragActive1 = useCallback(
     debounce(position => {
       setpoint({x: position.x, y: position.y});
-    }, 20),
+      setpoint1({x: position.x, y: position.y});
+    }, 10),
+    [],
+  );
+  const onDragActive2 = useCallback(
+    debounce(position => {
+      setpoint({x: position.x, y: position.y});
+      setpoint2({x: position.x, y: position.y});
+    }, 10),
+    [],
+  );
+  const onDragActive3 = useCallback(
+    debounce(position => {
+      setpoint({x: position.x, y: position.y});
+      setpoint3({x: position.x, y: position.y});
+    }, 10),
+    [],
+  );
+  const onDragActive4 = useCallback(
+    debounce(position => {
+      setpoint({x: position.x, y: position.y});
+      setpoint4({x: position.x, y: position.y});
+    }, 10),
     [],
   );
   useEffect(() => {
@@ -104,7 +126,8 @@ const CameraCrop = props => {
             <View style={[styles.container, styles.viewImage]}>
               <ImageBackground
                 resizeMode="cover"
-                source={{uri: `${image}`}}
+                // source={{uri: `${image}`}}
+                source={image}
                 style={{width: widthImage, height: heightImage}}>
                 <SvgPoint
                   point1={point1}
@@ -117,88 +140,84 @@ const CameraCrop = props => {
                 <DragAndDrop
                   styleBox={{
                     position: 'absolute',
-                    left: -17,
-                    top: -17,
+                    left: -7,
+                    top: -7,
                     transform: [{rotate: '135deg'}],
                   }}
                   x={point1.x}
                   y={point1.y}
-                  limitationHeight={heightImage}
-                  limitationWidth={widthImage}
+                  limitationHeight={point4.y - 50}
+                  limitationWidth={point2.x - 50}
                   minX={0}
                   minY={0}
                   onDragActive={position => {
                     setIsDrag(position.active);
-                    onDragActive(position);
+                    onDragActive1(position);
                   }}
                   onDragEnd={position => {
-                    setpoint1({x: position.x, y: position.y});
                     setIsDrag(position.active);
                   }}
                 />
                 <DragAndDrop
                   styleBox={{
                     position: 'absolute',
-                    left: -3,
-                    top: -17,
+                    left: -7,
+                    top: -7,
                     transform: [{rotate: '-135deg'}],
                   }}
                   x={point2.x}
                   y={point2.y}
-                  limitationHeight={heightImage}
+                  limitationHeight={point3.y - 50}
                   limitationWidth={widthImage}
-                  minX={0}
+                  minX={point1.x + 50}
                   minY={0}
                   onDragActive={position => {
                     setIsDrag(position.active);
-                    onDragActive(position);
+                    onDragActive2(position);
                   }}
                   onDragEnd={position => {
-                    setpoint2({x: position.x, y: position.y});
                     setIsDrag(position.active);
                   }}
                 />
                 <DragAndDrop
                   styleBox={{
                     position: 'absolute',
-                    left: -3,
-                    top: -3,
+                    left: -7,
+                    top: -7,
                     transform: [{rotate: '-45deg'}],
                   }}
                   x={point3.x}
                   y={point3.y}
                   limitationHeight={heightImage}
                   limitationWidth={widthImage}
-                  minX={0}
-                  minY={0}
+                  minX={point4.x + 50}
+                  minY={point2.y + 50}
                   onDragActive={position => {
                     setIsDrag(position.active);
-                    onDragActive(position);
+                    onDragActive3(position);
                   }}
                   onDragEnd={position => {
-                    setpoint3({x: position.x, y: position.y});
                     setIsDrag(position.active);
                   }}
                 />
                 <DragAndDrop
                   styleBox={{
                     position: 'absolute',
-                    left: -17,
-                    top: -3,
+                    left: -7,
+                    top: -7,
                     transform: [{rotate: '45deg'}],
                   }}
                   x={point4.x}
                   y={point4.y}
                   limitationHeight={heightImage}
-                  limitationWidth={widthImage}
+                  limitationWidth={point3.x - 50}
                   minX={0}
-                  minY={0}
+                  minY={point1.y + 50}
                   onDragActive={position => {
                     setIsDrag(position.active);
-                    onDragActive(position);
+                    onDragActive4(position);
                   }}
                   onDragEnd={position => {
-                    setpoint4({x: position.x, y: position.y});
                     setIsDrag(position.active);
                   }}
                 />
@@ -209,9 +228,7 @@ const CameraCrop = props => {
                       {left: point.x > widthImage / 2 ? 0 : widthImage - 100},
                     ]}>
                     <View style={styles.viewScope}>
-                      <View style={styles.viewPoint} />
-
-                      <Image
+                      <ImageBackground
                         source={{uri: `${image}`}}
                         style={[
                           {width: widthImage, height: heightImage},
@@ -225,8 +242,16 @@ const CameraCrop = props => {
                               },
                             ],
                           },
-                        ]}
-                      />
+                        ]}>
+                        <SvgPoint
+                          point1={point1}
+                          point2={point2}
+                          point3={point3}
+                          point4={point4}
+                          widthImage={widthImage}
+                          heightImage={heightImage}
+                        />
+                      </ImageBackground>
                     </View>
                   </View>
                 )}

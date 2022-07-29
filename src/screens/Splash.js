@@ -2,17 +2,10 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useState, useEffect, useRef} from 'react';
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  Image,
   ImageBackground,
   Animated,
 } from 'react-native';
-import Svg, {Polyline, Line, Path} from 'react-native-svg';
 import {icons, images} from '../constans';
 
 const Splash = () => {
