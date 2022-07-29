@@ -126,8 +126,7 @@ const CameraCrop = props => {
             <View style={[styles.container, styles.viewImage]}>
               <ImageBackground
                 resizeMode="cover"
-                // source={{uri: `${image}`}}
-                source={image}
+                source={{uri: `${image}`}}
                 style={{width: widthImage, height: heightImage}}>
                 <SvgPoint
                   point1={point1}
