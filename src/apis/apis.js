@@ -8,7 +8,7 @@ export const postImg = img => {
   });
   return new Promise((resole, reject) => {
     axios
-      .post('http://210.245.51.29:8018/get_card_region', formData, {
+      .post('http://210.245.51.29:8020/get_card_region', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -60,7 +60,7 @@ export const postImageAndPosition = data => {
 
   return new Promise((resole, reject) => {
     axios
-      .post('http://210.245.51.29:8018/get_card_no', fromData, {
+      .post('http://210.245.51.29:8020/get_card_no', fromData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -11,14 +11,17 @@ import {
 import StackNavigation from './src/navigation/StackNavigation';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
+import Orientation from 'react-native-orientation-locker';
 
 const App = () => {
+  useEffect(() => {
+    Orientation.lockToPortrait();
+  }, []);
   return (
     <NavigationContainer>
       <GestureHandlerRootView style={styles.container}>
         <SafeAreaView style={styles.container}>
           <StatusBar hidden />
-
           <StackNavigation />
         </SafeAreaView>
       </GestureHandlerRootView>
