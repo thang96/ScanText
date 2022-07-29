@@ -145,8 +145,8 @@ const CameraCrop = props => {
                   }}
                   x={point1.x}
                   y={point1.y}
-                  limitationHeight={point4.y - 50}
-                  limitationWidth={point2.x - 50}
+                  limitationHeight={heightImage}
+                  limitationWidth={widthImage}
                   minX={0}
                   minY={0}
                   onDragActive={position => {
@@ -166,9 +166,9 @@ const CameraCrop = props => {
                   }}
                   x={point2.x}
                   y={point2.y}
-                  limitationHeight={point3.y - 50}
+                  limitationHeight={heightImage}
                   limitationWidth={widthImage}
-                  minX={point1.x + 50}
+                  minX={0}
                   minY={0}
                   onDragActive={position => {
                     setIsDrag(position.active);
@@ -189,8 +189,8 @@ const CameraCrop = props => {
                   y={point3.y}
                   limitationHeight={heightImage}
                   limitationWidth={widthImage}
-                  minX={point4.x + 50}
-                  minY={point2.y + 50}
+                  minX={0}
+                  minY={0}
                   onDragActive={position => {
                     setIsDrag(position.active);
                     onDragActive3(position);
@@ -209,9 +209,9 @@ const CameraCrop = props => {
                   x={point4.x}
                   y={point4.y}
                   limitationHeight={heightImage}
-                  limitationWidth={point3.x - 50}
+                  limitationWidth={widthImage}
                   minX={0}
-                  minY={point1.y + 50}
+                  minY={0}
                   onDragActive={position => {
                     setIsDrag(position.active);
                     onDragActive4(position);

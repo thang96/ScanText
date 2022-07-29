@@ -87,8 +87,6 @@ const HomeScreen = () => {
         />
       </View>
 
-      <View></View>
-
       <View style={styles.viewScanBottom}>
         <TouchableOpacity
           onPress={() => pickSingleWithCamera()}
