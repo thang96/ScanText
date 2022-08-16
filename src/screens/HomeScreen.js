@@ -21,7 +21,6 @@ const HomeScreen = () => {
   const navigation = useNavigation();
   const scanValue = useRef(new Animated.Value(0)).current;
   const [zoomScale, setZooomScale] = useState(4);
-
   useEffect(() => {
     const dimension = Dimensions.get('window').height;
     if (dimension > 700) {

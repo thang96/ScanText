@@ -265,7 +265,7 @@ const CameraCrop = props => {
                 fontWeight: 'bold',
                 alignSelf: 'center',
               }}
-              value={`Position:${resposeData}`}
+              value={`${resposeData}`}
               onChangeText={text => setResposeData(text)}
             />
           )}
